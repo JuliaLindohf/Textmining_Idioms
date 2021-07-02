@@ -1,3 +1,40 @@
+import os
+import json
+import time
+import requests
+import datetime
+import dateutil
+import unittest
+import pandas as pd
+import configparser
+from dateutil.relativedelta import relativedelta
+import urllib3
+import nltk
+from os import getcwd
+import pandas as pd
+import re
+import string
+import matplotlib.pyplot as plt
+import numpy as np
+import scipy as sp 
+import seaborn as sns
+nltk.download('stopwords')
+nltk.download('punkt')
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize 
+from nltk.tokenize import RegexpTokenizer
+import spacy
+import bz2 
+import os
+from os import path
+from PIL import Image
+from wordcloud import WordCloud, STOPWORDS, ImageColorGenerator
+
+# Load English tokenizer, tagger, parser, NER and word vectors
+nlp = spacy.load("en_core_web_sm") 
+
+nlp = spacy.load("en_core_web_sm")
+
 class cleantextdata:
   # The procedures is designed to clean the input text data, from a data frame 
   # To store both the 
