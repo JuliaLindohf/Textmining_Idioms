@@ -40,8 +40,6 @@ nlp = spacy.load("en_core_web_sm")
 
 nlp = spacy.load("en_core_web_sm")
 
-
-
 class processingwords: 
   # to process the entities, words and collocations upon the word level
   def __init__(self, wholepassages, keysentences): 
@@ -87,6 +85,28 @@ class processingwords:
 
     return    entityDictionary
 
+  def entity_labels_keysentences(self): 
+    # the aim of constructing this function, is to count, how often a specific entity appear in a key sentence
+    # to look at the key sentences
+    keysentences = self.sentences 
+
+    # to count the labels and entities
+    entity_count = {}
+
+    for sent in keysentences: 
+      # to process the passage 
+      doc = nlp(sent) 
+      for ent in doc.ents: 
+        tempent = (ent.text, ent.label_) 
+
+        if tempent in entity_count: 
+          entity_count[tempent] += 1
+        else: 
+          entity_count[tempent] = 1
+
+    return entity_count
+
+
   def bigram_in_keysentence(self, apassage): 
     # to create an empty list, to store all the words 
     # the input variable is one row from the dataframe, not the entire list of sentences  
@@ -119,8 +139,9 @@ class processingwords:
 
       n = 3
       wordlist = apassage.split( )
-
-      l = len(wordslist) 
+       
+      l = len(wordlist) 
+      # print(l)
       if l == 3: 
         tempbi = (wordlist[0], wordlist[1], wordlist[2])
         if tempbi in self.trigrams:
@@ -153,3 +174,5 @@ class processingwords:
           temp = self.trigram_in_keysentence(sentence)
 
      return self.trigrams
+
+  
